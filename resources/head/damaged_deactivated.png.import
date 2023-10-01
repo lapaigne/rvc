@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/damaged_deactivated.png-e9131ede341dbdc9d4b187981cf65182.stex"
+path="res://.import/damaged_deactivated.png-08c17dd51e40f2cf29815b93b41972ab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kbrgs pics/head/damaged_deactivated.png"
-dest_files=[ "res://.import/damaged_deactivated.png-e9131ede341dbdc9d4b187981cf65182.stex" ]
+source_file="res://resources/head/damaged_deactivated.png"
+dest_files=[ "res://.import/damaged_deactivated.png-08c17dd51e40f2cf29815b93b41972ab.stex" ]
 
 [params]
 
