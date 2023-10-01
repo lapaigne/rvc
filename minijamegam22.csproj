@@ -2,4 +2,11 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="kbrgs pics\**" />
+    <EmbeddedResource Remove="kbrgs pics\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="scripts\" />
+  </ItemGroup>
 </Project>

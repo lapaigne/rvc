@@ -1,42 +1,25 @@
 using Godot;
 using System;
 
-public class Player : Sprite
+public class Player : KinematicBody2D
 {
-	private int speed = 4;
+    Vector2 velocity = new Vector2();
+    int acceleration = 2000;
+    int deceleration = 250;
+    const int speed = 200;
 
-
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(float delta)
-	{
-		LookAt(GetGlobalMousePosition());
-		GD.Print(RotationDegrees);
-		OnRotation();
-
-		if(Input.IsKeyPressed((int)KeyList.W))
-		{
-			Position += new Vector2(0, -speed);
-		}
-		if(Input.IsKeyPressed((int)KeyList.S))
-		{
-			Position += new Vector2(0, speed);
-		}
-		if (Input.IsKeyPressed((int)KeyList.A))
-		{
-			Position += new Vector2(-speed, 0);
-		}
-		if (Input.IsKeyPressed((int)KeyList.D))
-		{
-			Position += new Vector2(speed, 0);
-		}
-	}
-
-	private void OnRotation()
-	{
-	}
+    public override void _PhysicsProcess(float delta)
+    {
+        var input = Input.GetVector("left", "right", "up", "down");
+        if (input == Vector2.Zero)
+        {
+            velocity = (velocity.Length() > (delta * acceleration)) ? velocity - velocity.Normalized() * deceleration * delta : Vector2.Zero;
+        }
+        else
+        {
+            velocity += input * acceleration * delta;
+            velocity = velocity.Normalized() * speed;
+        }
+        velocity = MoveAndSlide(velocity);
+    }
 }
