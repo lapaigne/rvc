@@ -4,7 +4,7 @@ using System;
 public class Player : KinematicBody2D
 {
     Vector2 velocity = new Vector2();
-    int acceleration = 2000;
+    int acceleration = 5000;
     int deceleration = 250;
     const int speed = 200;
 
@@ -31,7 +31,6 @@ public class Player : KinematicBody2D
         input = input.Normalized();
 
         var label = GetNode<Label>("/root/Main/vel");
-        label.Text = input.ToString();
 
         if (input == Vector2.Zero)
         {
@@ -39,9 +38,11 @@ public class Player : KinematicBody2D
         }
         else
         {
-            velocity += input * acceleration * delta;
+            GD.Print(velocity);
+            velocity += input * acceleration * delta * speed;
             velocity = velocity.Normalized() * speed;
         }
         velocity = MoveAndSlide(velocity);
+        label.Text = input.ToString() + "\n" + velocity.ToString() + "\n" + Position.ToString();
     }
 }
