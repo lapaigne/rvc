@@ -15,7 +15,7 @@ scale = Vector2( 0.46875, 0.546875 )
 polygon = PoolVector2Array( 6.4, 6.4, -6.4, 6.4, -6.4, -6.4, 6.4, -6.4 )
 
 [node name="HandTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 10.0
 one_shot = true
 
 [connection signal="timeout" from="HandTimer" to="." method="OnHandLaunchTimeout" flags=6]

@@ -4,12 +4,15 @@ using System;
 public class Player : KinematicBody2D
 {
     Vector2 velocity = new Vector2();
-    int acceleration = 5000;
+    int acceleration = 500;
     int deceleration = 250;
     const int speed = 200;
+    bool calledRocket = false;
 
     public override void _PhysicsProcess(float delta)
     {
+        LookAt(GetGlobalMousePosition());
+        Rotate(Mathf.Pi / 2);
         //var input = Input.GetVector("left", "right", "up", "down");
         var input = new Vector2();
         if (Input.IsActionPressed("left"))
@@ -28,6 +31,12 @@ public class Player : KinematicBody2D
         {
             input.y = 1;
         }
+
+        if (Input.IsActionPressed("launch"))
+        {
+            //ReparentRocketHand(ref calledRocket);
+        }
+
         input = input.Normalized();
 
         var label = GetNode<Label>("/root/Main/vel");
@@ -44,5 +53,30 @@ public class Player : KinematicBody2D
         }
         velocity = MoveAndSlide(velocity);
         label.Text = input.ToString() + "\n" + velocity.ToString() + "\n" + Position.ToString();
+    }
+
+    public void ReparentRocketHand(ref bool called)
+    {
+        // yet to figure out a way to transfer global coords et rotation
+
+        if (called)
+        {
+            return;
+        }
+        var child = GetNode<Hand>("Hand");
+        RemoveChild(child);
+
+        var gp = child.GlobalPosition;
+        var gr = child.GlobalRotation;
+
+        var node = GetNode<Main>("/root/Main");
+        node.AddChild(child);
+
+
+        //child.GlobalPosition = gp;
+        //child.GlobalRotation = gr;
+
+
+        calledRocket = true;
     }
 }

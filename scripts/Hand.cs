@@ -51,8 +51,9 @@ public class Hand : KinematicBody2D
             //GD.Print(currentMouse.ToString() + "\t" + velocity.ToString());
 
             var collision = MoveAndCollide(velocity);
-            if (collision != null || dif < 25)
+            if (collision != null || dif < 10)
             {
+                QueueFree();
                 hadExploded = true;
             }
         }
@@ -60,7 +61,6 @@ public class Hand : KinematicBody2D
         if (hadExploded) 
         {
             GD.Print("Kaboom!!");
-            QueueFree();
         }
     }
     public void OnHandLaunchTimeout()
