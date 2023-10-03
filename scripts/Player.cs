@@ -34,7 +34,7 @@ public class Player : KinematicBody2D
 
         if (Input.IsActionPressed("launch"))
         {
-            //ReparentRocketHand(ref calledRocket);
+            ReparentRocketHand(ref calledRocket);
         }
 
         input = input.Normalized();
@@ -63,19 +63,18 @@ public class Player : KinematicBody2D
         {
             return;
         }
-        var child = GetNode<Hand>("Hand");
-        RemoveChild(child);
+        var child = GetChild<Hand>(2);
 
         var gp = child.GlobalPosition;
         var gr = child.GlobalRotation;
+        
+        RemoveChild(child);
 
         var node = GetNode<Main>("/root/Main");
         node.AddChild(child);
 
-
-        //child.GlobalPosition = gp;
-        //child.GlobalRotation = gr;
-
+        child.GlobalPosition = gp;
+        child.GlobalRotation = gr;
 
         calledRocket = true;
     }
