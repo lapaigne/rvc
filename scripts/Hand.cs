@@ -1,26 +1,27 @@
-using Godot;
 using System;
+using Godot;
 
 public class Hand : KinematicBody2D
 {
-    Timer timer;
-    
+    private Timer timer;
+    private float waitTime = 3;
     Vector2 velocity;
-    
     int speed;
     int acceleration;
-    
     bool isFlying;
     bool hadExploded;
+
     public override void _Ready()
     {
         timer = GetNode<Timer>("HandTimer");
-        
+        timer.OneShot = true;
+        timer.WaitTime = waitTime;
+
         velocity = new Vector2();
-        
+
         speed = 10;
         acceleration = 10;
-        
+
         isFlying = false;
         hadExploded = false;
     }
@@ -28,6 +29,7 @@ public class Hand : KinematicBody2D
     public override void _PhysicsProcess(float delta)
     {
         //GD.Print(velocity);
+        GD.Print(timer.TimeLeft);
         if (Input.IsActionPressed("launch") && !isFlying && !hadExploded)
         {
             isFlying = true;
@@ -36,12 +38,15 @@ public class Hand : KinematicBody2D
 
         if (isFlying)
         {
+            if (timer.TimeLeft == 0)
+            {
+                Explode();
+            }
 
             var currentMouse = GetGlobalMousePosition();
             var direction = (currentMouse - GlobalPosition).Normalized();
             var dif = (currentMouse - GlobalPosition).Length();
-            GD.Print(dif);
-
+            // GD.Print(dif);
 
             velocity += direction * acceleration * delta * speed;
             velocity = velocity.Normalized() * speed;
@@ -54,18 +59,25 @@ public class Hand : KinematicBody2D
             if (collision != null || dif < 10)
             {
                 QueueFree();
-                hadExploded = true;
+                Explode();
             }
         }
 
-        if (hadExploded) 
+        if (hadExploded)
         {
-            GD.Print("Kaboom!!");
+            // GD.Print("Kaboom!!");
         }
     }
+
     public void OnHandLaunchTimeout()
     {
         isFlying = false;
         hadExploded = true;
+    }
+
+    public void Explode()
+    {
+        hadExploded = true;
+        // do some stuff
     }
 }

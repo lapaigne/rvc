@@ -22,7 +22,13 @@ _global_script_class_icons={
 
 config/name="robots-vs-cyborgs"
 run/main_scene="res://scenes/Main.tscn"
+boot_splash/show_image=false
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=640
+window/size/height=480
 
 [editor]
 
@@ -71,6 +77,11 @@ down={
 launch={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+restart={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777248,"unicode":0,"echo":false,"script":null)
  ]
 }
 
