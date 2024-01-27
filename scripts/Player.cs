@@ -47,12 +47,12 @@ public class Player : KinematicBody2D
         }
         else
         {
-            GD.Print(velocity);
             velocity += input * acceleration * delta * speed;
             velocity = velocity.Normalized() * speed;
         }
         velocity = MoveAndSlide(velocity);
-        label.Text = input.ToString() + "\n" + velocity.ToString() + "\n" + Position.ToString();
+        label.Text = $"{input}\n{velocity}\n{Position}";
+        ;
     }
 
     public void ReparentRocketHand(ref bool called)

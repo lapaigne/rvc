@@ -28,8 +28,6 @@ public class Hand : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        //GD.Print(velocity);
-        GD.Print(timer.TimeLeft);
         if (Input.IsActionPressed("launch") && !isFlying && !hadExploded)
         {
             isFlying = true;
@@ -46,14 +44,12 @@ public class Hand : KinematicBody2D
             var currentMouse = GetGlobalMousePosition();
             var direction = (currentMouse - GlobalPosition).Normalized();
             var dif = (currentMouse - GlobalPosition).Length();
-            // GD.Print(dif);
 
             velocity += direction * acceleration * delta * speed;
             velocity = velocity.Normalized() * speed;
 
             LookAt(currentMouse);
             Rotate(Mathf.Pi / 2);
-            //GD.Print(currentMouse.ToString() + "\t" + velocity.ToString());
 
             var collision = MoveAndCollide(velocity);
             if (collision != null || dif < 10)
@@ -63,10 +59,7 @@ public class Hand : KinematicBody2D
             }
         }
 
-        if (hadExploded)
-        {
-            // GD.Print("Kaboom!!");
-        }
+        if (hadExploded) { }
     }
 
     public void OnHandLaunchTimeout()
