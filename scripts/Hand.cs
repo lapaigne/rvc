@@ -47,6 +47,7 @@ public class Hand : KinematicBody2D
 
             velocity += direction * acceleration * delta * speed;
             velocity = velocity.Normalized() * speed;
+            
 
             LookAt(currentMouse);
             Rotate(Mathf.Pi / 2);

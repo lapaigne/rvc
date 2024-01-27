@@ -5,7 +5,6 @@ public class Player : KinematicBody2D
 {
     Vector2 velocity = new Vector2();
     int acceleration = 500;
-    int deceleration = 250;
     const int speed = 200;
     bool calledRocket = false;
 
@@ -43,7 +42,7 @@ public class Player : KinematicBody2D
 
         if (input == Vector2.Zero)
         {
-            velocity = (velocity.Length() > (delta * acceleration)) ? velocity - velocity.Normalized() * deceleration * delta : Vector2.Zero;
+            velocity = Vector2.Zero;
         }
         else
         {
@@ -52,13 +51,10 @@ public class Player : KinematicBody2D
         }
         velocity = MoveAndSlide(velocity);
         label.Text = $"{input}\n{velocity}\n{Position}";
-        ;
     }
 
     public void ReparentRocketHand(ref bool called)
     {
-        // yet to figure out a way to transfer global coords et rotation
-
         if (called)
         {
             return;
