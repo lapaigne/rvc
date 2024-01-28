@@ -19,7 +19,7 @@ public class Hand : KinematicBody2D
 
         velocity = new Vector2();
 
-        speed = 10;
+        speed = 1000;
         acceleration = 10;
 
         isFlying = false;
@@ -43,19 +43,17 @@ public class Hand : KinematicBody2D
 
             var currentMouse = GetGlobalMousePosition();
             var direction = (currentMouse - GlobalPosition).Normalized();
-            var dif = (currentMouse - GlobalPosition).Length();
+            var targetDistance = (currentMouse - GlobalPosition).Length();
 
-            velocity += direction * acceleration * delta * speed;
+            velocity += direction * acceleration * speed;
             velocity = velocity.Normalized() * speed;
-            
-
             LookAt(currentMouse);
             Rotate(Mathf.Pi / 2);
 
-            var collision = MoveAndCollide(velocity);
-            if (collision != null || dif < 10)
+            var collision = MoveAndCollide(velocity * delta);
+
+            if (collision != null || targetDistance < 10)
             {
-                QueueFree();
                 Explode();
             }
         }
@@ -71,7 +69,11 @@ public class Hand : KinematicBody2D
 
     public void Explode()
     {
+        velocity = Vector2.Zero;
+        isFlying = false;
         hadExploded = true;
         // do some stuff
+
+        // QueueFree();
     }
 }

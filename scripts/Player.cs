@@ -1,11 +1,11 @@
-using Godot;
 using System;
+using Godot;
 
 public class Player : KinematicBody2D
 {
     Vector2 velocity = new Vector2();
-    int acceleration = 500;
-    const int speed = 200;
+    int acceleration = 10;
+    const int speed = 240;
     bool calledRocket = false;
 
     public override void _PhysicsProcess(float delta)
@@ -46,10 +46,10 @@ public class Player : KinematicBody2D
         }
         else
         {
-            velocity += input * acceleration * delta * speed;
-            velocity = velocity.Normalized() * speed;
+            velocity += input * acceleration * speed;
+            velocity = velocity.Normalized() * speed; 
         }
-        velocity = MoveAndSlide(velocity);
+        MoveAndSlide(velocity); // no delta because MAS uses it internally
         label.Text = $"{input}\n{velocity}\n{Position}";
     }
 
@@ -63,11 +63,10 @@ public class Player : KinematicBody2D
 
         var gp = child.GlobalPosition;
         var gr = child.GlobalRotation;
-        
+
         RemoveChild(child);
 
-        var node = GetNode<Main>("/root/Main");
-        node.AddChild(child);
+        GetNode<Main>("/root/Main").AddChild(child);
 
         child.GlobalPosition = gp;
         child.GlobalRotation = gr;
