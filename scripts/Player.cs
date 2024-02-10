@@ -38,7 +38,8 @@ public class Player : KinematicBody2D
 
         input = input.Normalized();
 
-        var label = GetNode<Label>("/root/Main/vel");
+        var UIControlNode = GetNode<Control>("UICanvasLayer/UIControlNode");
+        var label = UIControlNode.GetChild<Label>(0);
 
         if (input == Vector2.Zero)
         {
