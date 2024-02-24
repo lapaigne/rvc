@@ -19,7 +19,7 @@ public class Hand : KinematicBody2D
 
         velocity = new Vector2();
 
-        speed = 1000;
+        speed = 640;
         acceleration = 10;
 
         isFlying = false;

@@ -5,7 +5,7 @@ public class Player : KinematicBody2D
 {
     Vector2 velocity = new Vector2();
     int acceleration = 10;
-    const int speed = 240;
+    const int speed = 160;
     bool calledRocket = false;
 
     public override void _PhysicsProcess(float delta)
