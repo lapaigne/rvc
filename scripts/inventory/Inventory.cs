@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -12,9 +11,15 @@ public class Inventory : Node2D
 
     public List<Item> Storage;
 
-    public override void _Ready() { }
+    public override void _Ready()
+    {
+        Storage = new List<Item>();
 
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
+        AddItem(3);
+        AddItem(0);
+        AddItem(7);
+    }
+
     public override void _Process(float delta) { }
 
     public Item GetItem(int id)
@@ -24,6 +29,6 @@ public class Inventory : Node2D
 
     public void AddItem(int id)
     {
-        Storage.Add(new Item());
+        Storage.Add(new Item(id));
     }
 }

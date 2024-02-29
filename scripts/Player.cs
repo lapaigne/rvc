@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public class Player : KinematicBody2D
@@ -38,9 +39,6 @@ public class Player : KinematicBody2D
 
         input = input.Normalized();
 
-        var UIControlNode = GetNode<Control>("UICanvasLayer/UIControlNode");
-        var label = UIControlNode.GetChild<Label>(0);
-
         if (input == Vector2.Zero)
         {
             velocity = Vector2.Zero;
@@ -48,10 +46,20 @@ public class Player : KinematicBody2D
         else
         {
             velocity += input * acceleration * speed;
-            velocity = velocity.Normalized() * speed; 
+            velocity = velocity.Normalized() * speed;
         }
         MoveAndSlide(velocity); // no delta because MAS uses it internally
-        label.Text = $"{input}\n{velocity}\n{Position}";
+
+        var UIControlNode = GetNode<Control>("UICanvasLayer/UIControlNode");
+        var label = UIControlNode.GetChild<Label>(0);
+        var inventoryNode = GetNode<Inventory>("Inventory");
+        var listData = inventoryNode.Storage;
+        var strArray = new List<string>();
+        foreach (var e in listData)
+            strArray.Add(e.ToString());
+        var listString = string.Join("\n", strArray);
+
+        label.Text = $"{input}\n{velocity}\n{Position}\n\nslots:{listData.Count}\n{listString}";
     }
 
     public void ReparentRocketHand(ref bool called)
