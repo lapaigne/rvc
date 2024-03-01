@@ -1,17 +1,7 @@
+using Godot;
+
 public class Item
 {
-    /*
-    
-    categories:
-    categoryFood
-    categoryAmmo
-    categoryEquipment
-    categoryTool
-    categoryMaterial
-    categoryNone
-        
-    */
-
     public enum ItemCategory
     {
         categoryNone = 0,
@@ -36,7 +26,7 @@ public class Item
         Category = category;
     }
 
-    public virtual void Use() { }
+    public virtual void Use(ref Node2D target) { }
 
     public override string ToString()
     {

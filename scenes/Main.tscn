@@ -859,5 +859,6 @@ position = Vector2( -80, 36 )
 scale = Vector2( 2, 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+rotation = -1.20079
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="."]

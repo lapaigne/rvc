@@ -1,13 +1,17 @@
+using Godot;
+
 public class Food : Item
 {
-    public int Amount;
-    public Food(int id, int amount) : base(id)
+    public int amount;
+
+    public Food(int id, int amount)
+        : base(id)
     {
-        Amount = amount;
+        this.amount = amount;
     }
 
-    public override void Use()
+    public void Use(ref Player target)
     {
-        
+        target.HP = (target.HP > 0 && target.HP + amount < 100) ? target.HP + amount : target.HP;
     }
 }

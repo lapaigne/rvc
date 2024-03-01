@@ -22,9 +22,11 @@ public class Inventory : Node2D
 
     public override void _Process(float delta) { }
 
-    public Item GetItem(int id)
+    public Item GetItem(int index)
     {
-        return new Item();
+        if (index < Storage.Count)
+            return Storage[index];
+        return null;
     }
 
     public void AddItem(int id)

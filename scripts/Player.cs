@@ -4,10 +4,12 @@ using Godot;
 
 public class Player : KinematicBody2D
 {
-    Vector2 velocity = new Vector2();
-    int acceleration = 10;
-    const int speed = 160;
-    bool calledRocket = false;
+    Vector2 Velocity = new Vector2();
+    int Acceleration = 10;
+    const int SPEED = 160;
+    bool CalledRocket = false;
+
+    public int HP = 100;
 
     public override void _PhysicsProcess(float delta)
     {
@@ -34,21 +36,21 @@ public class Player : KinematicBody2D
 
         if (Input.IsActionPressed("launch"))
         {
-            ReparentRocketHand(ref calledRocket);
+            ReparentRocketHand();
         }
 
         input = input.Normalized();
 
         if (input == Vector2.Zero)
         {
-            velocity = Vector2.Zero;
+            Velocity = Vector2.Zero;
         }
         else
         {
-            velocity += input * acceleration * speed;
-            velocity = velocity.Normalized() * speed;
+            Velocity += input * Acceleration * SPEED;
+            Velocity = Velocity.Normalized() * SPEED;
         }
-        MoveAndSlide(velocity); // no delta because MAS uses it internally
+        MoveAndSlide(Velocity); // no delta because MAS uses it internally
 
         var UIControlNode = GetNode<Control>("UICanvasLayer/UIControlNode");
         var label = UIControlNode.GetChild<Label>(0);
@@ -59,12 +61,13 @@ public class Player : KinematicBody2D
             strArray.Add(e.ToString());
         var listString = string.Join("\n", strArray);
 
-        label.Text = $"{input}\n{velocity}\n{Position}\n\nslots:{listData.Count}\n{listString}";
+        label.Text =
+            $"{input}\n{Velocity}\n{Position}\n\nhp:{HP}\n\nslots:{listData.Count}\n{listString}";
     }
 
-    public void ReparentRocketHand(ref bool called)
+    public void ReparentRocketHand()
     {
-        if (called)
+        if (CalledRocket)
         {
             return;
         }
@@ -80,6 +83,6 @@ public class Player : KinematicBody2D
         child.GlobalPosition = gp;
         child.GlobalRotation = gr;
 
-        calledRocket = true;
+        CalledRocket = true;
     }
 }
