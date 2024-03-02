@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/player/body002.png" type="Texture" id=3]
-[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Light.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Inventory.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scripts/UI.cs" type="Script" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=20]
 blend_mode = 1
@@ -43,13 +41,8 @@ z_as_relative = false
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="UICanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="UIControlNode" parent="UICanvasLayer" instance=ExtResource( 4 )]
-script = ExtResource( 7 )
-
 [node name="Light" parent="." instance=ExtResource( 5 )]
-position = Vector2( -20, -16 )
+position = Vector2( 0, -7 )
 
 [node name="Texture" parent="Light" index="0"]
 color = Color( 0.968627, 0.913725, 0.45098, 1 )

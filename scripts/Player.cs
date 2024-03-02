@@ -52,7 +52,7 @@ public class Player : KinematicBody2D
         }
         MoveAndSlide(Velocity); // no delta because MAS uses it internally
 
-        var UIControlNode = GetNode<Control>("UICanvasLayer/UIControlNode");
+        var UIControlNode = GetParent().GetNode<Control>("UICanvasLayer/UIControlNode");
         var label = UIControlNode.GetChild<Label>(0);
         var inventoryNode = GetNode<Inventory>("Inventory");
         var listData = inventoryNode.Storage;
