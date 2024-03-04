@@ -29,7 +29,7 @@ public class KinematicNPC : KinematicBody2D
     private void OnBodyEntered(Node collider)
     {
         GD.Print(collider.Name);
-        if (collider.Name == "Hand")
+        if (collider.Name == "Hand" && (bool)collider.Get("isFlying"))
         {
             HP -= 30;
             collider.QueueFree();

@@ -8,7 +8,7 @@ public class Hand : KinematicBody2D
     Vector2 velocity;
     int speed;
     int acceleration;
-    bool isFlying;
+    public bool isFlying;
     bool hadExploded;
 
     public override void _Ready()
