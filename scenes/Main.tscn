@@ -866,6 +866,7 @@ rotation = -1.20079
 [node name="UICanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UIControlNode" parent="UICanvasLayer" instance=ExtResource( 4 )]
+visible = false
 script = ExtResource( 6 )
 
 [node name="KinematicNPC" parent="." instance=ExtResource( 8 )]
