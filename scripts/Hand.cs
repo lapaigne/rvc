@@ -54,10 +54,6 @@ public class Hand : KinematicBody2D
 
             if (collision != null || targetDistance < 10)
             {
-                var colliderName = ((Node2D) collision.Collider).Name;
-                if (colliderName == "KinematicNPC"){
-                    ((KinematicNPC) collision.Collider).HP -= 30;
-                }
                 Explode();
             }
         }
