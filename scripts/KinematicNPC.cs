@@ -21,15 +21,13 @@ public class KinematicNPC : KinematicBody2D
         }
     }
 
-    private void OnBodyEntered(Node collider)
+    public override void _Process(float delta)
     {
-        // GD.Print(collider.Name);
-        // if (collider == null || collider == this)
-        // {
-        //     return;
-        // }
-        // HP -= 40;
+        var label = GetNode<Control>("CanvasLayer/Control").GetChild<Label>(0);
+        label.Text = $"{HP}";
     }
+
+    private void OnBodyEntered(Node collider) { }
 
     private void OnDeath()
     {
